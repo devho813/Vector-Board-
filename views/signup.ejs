@@ -1,0 +1,139 @@
+<!-- signup (회원가입 페이지) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 ㅣ Vector Board</title>
+    <meta name="Author" content="Lee ChanHo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/signup.css">
+
+    <script src="/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div class="sign-up">
+        <a class="goto-main" href="/">메인으로</a>
+        <div class="signup-container">
+            <header class="header">
+                <h1 class="form-logo">
+                    <a href="/"><img src="/images/LOGO1.png"></a>
+                </h1>
+                <h3 class="form-title">
+                    <span>회원가입</span>
+                    <div class="form-description">"회원가입 하시고 다양한 기능을 사용해보세요"</div>
+                </h3>
+
+                <div class="go-login">
+                    <span class="login-question">혹시 계정이 있으신가요? </span>
+                    <a class="login-link" href="/login">로그인</a>
+                </div>
+            </header>
+            <section class="signup-form">
+                <form name="signupForm" action="/signup" method="post">
+                    <article class="form-left">
+                        <label>
+                            <span>이름</span>
+                            <input type="text" name="name" placeholder="이름을 입력하세요" maxlength="10" required>
+                            <div id="checkName" class=""></div>
+                        </label>
+
+                        <label>
+                            <span>비밀번호</span>
+                            <input type="password" name="password" placeholder="비밀번호를 입력하세요" maxlength="15" required>
+                            <div id="checkPw" class=""></div>
+                        </label>
+
+                        <label>
+                            <span>비밀번호 확인</span>
+                            <input type="password" name="passwordCheck" placeholder="비밀번호 재확인" maxlength="15" required>
+                            <div id="checkPw2" class=""></div>
+                        </label>
+
+                    </article>
+                    <article class="form-right">
+                        <label>
+                            <span>이메일 주소</span>
+                            <input type="email" name="email" placeholder="이메일 주소를 입력하세요" maxlength="25" required>
+                            <div id="checkEmail" class=""></div>
+                        </label>
+
+                        <!-- 이메일 주소 중복체크(ajax) -->
+                        <script>
+                            (function(){
+                                var $email = $("input[name='email']");
+
+                                $email.on("blur", function(){
+                                    $.ajax({
+                                        type: 'GET',
+                                        data: {email: $email.val()},
+                                        url: '/emailCheck',
+                                        success: function(data, status, jqXHR){
+                                            if(data.email){
+                                                // 해당 이메일 주소가 중복되지 않을때
+                                                $("#checkEmail").addClass("check-complete");
+                                            }else{
+                                                // 해당 이메일 주소가 중복 될때
+                                                if($email.val()){
+                                                    $email.val("");
+                                                    alert("이미 사용중이거나 탈퇴한 아이디입니다.");
+                                                    $("#checkEmail").removeClass("check-complete");
+                                                }
+                                            }
+                                        },
+                                        error: function(xhr, status, e){
+                                            alert(e);
+                                        }
+                                    });
+                                });
+                            })();
+                        </script>
+
+                        <label>
+                            <span>직업</span>
+                            <input type="text" name="job" placeholder="직업명을 입력하세요" maxlength="10" required>
+                            <div id="checkJob" class=""></div>
+                        </label>
+
+                        <label>
+                            <span>직장명</span>
+                            <input type="text" name="workplace" placeholder="직장명을 입력하세요" maxlength="20" required>
+                            <div id="checkWorkPlace" class=""></div>
+                        </label>
+                    </article>
+
+                    <!-- form 유효성 검사  -->
+                    <script src="/js/signup_form_check.js"></script>
+
+                    <div class="form-bottom">
+                        <div class="agreement">
+                            <input id="termsCheckBox" class="terms-check" type="checkbox"> <!-- 이용약관 체크박스 -->
+                            <span class="agreement-text">
+                            회원가입 입력정보를 모두 입력하였으며
+                            <a class="privacy-policy">개인정보 보호정책</a>과
+                            <a class="terms-of-service">이용약관</a>에 동의합니다.
+                        </span>
+                        </div>
+                        <input class="signup-submit" type="submit" value="벡터보드 시작하기">
+                    </div>
+
+                    <!-- 이용약관 체크시 submit 버튼 fadeIn -->
+                    <script>
+                        var $termsCheckBox = $("#termsCheckBox");
+                        var $submitBtn = $(".signup-submit");
+                        $termsCheckBox.on("change", function(){
+                            if($(this).is(":checked")){
+                                $submitBtn.fadeIn(1000);
+                            }else{
+                                $submitBtn.fadeOut(500);
+                            }
+                        });
+                    </script>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

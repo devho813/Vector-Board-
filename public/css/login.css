@@ -1,0 +1,266 @@
+/*********************
+    login <로그인>
+**********************/
+
+body, html{
+    background-color: #4191e0;
+}
+
+/***** 반응형 기본  *****/
+.login{
+    width: 100%;
+    height: 100%;
+    background-color: #4191e0;
+    background-image: url(../images/overlay.png), url(../images/pattern-size1.svg);
+    background-position: top left, center center;
+    background-attachment: fixed, fixed;
+    background-size: auto, cover;
+}
+
+.login .goto-main{
+    position: relative;
+    left: 20px;
+    top: 20px;
+    color: white;
+    font-weight: 100;
+}
+
+.login .login-container{
+    position: relative;
+    top: 15%;
+    margin: 0 auto;
+    width: 550px;
+}
+
+@media screen and (max-width: 560px){
+    .login .login-container{
+        position: relative;
+        top: 6%;
+        margin: 0 auto;
+        width: 90%;
+    }
+}
+
+/* header */
+
+.header{
+    position: relative;
+    width: 100%;
+}
+
+.header .form-logo{
+    display: inline-block;
+    position: relative;
+    top: 12px;
+    margin-right: 15px;
+    z-index: 2;
+}
+
+.header .form-logo img{
+    width: 95px;
+}
+
+.header .form-title{
+    display: inline-block;
+    color: white;
+    font-weight: 100;
+    font-size: 2.3rem;
+    margin: 0;
+}
+
+.header .form-title > span{
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    box-shadow: 3px 3px 15px black;
+}
+
+.header .form-title .form-description{
+    position: relative;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    box-shadow: 3px 3px 15px black;
+    font-size: 1.1rem;
+}
+
+.header .go-signup{
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+@media screen and (max-width: 560px){
+    .header .go-signup{
+        margin: 20px 0 15px;
+    }
+}
+
+.header .go-signup .signup-question{
+    font-size: 0.9rem;
+    color: white;
+}
+
+.header .go-signup .signup-link{
+    position: relative;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #4191e0;
+}
+
+@media screen and (max-width: 560px){
+    .header .go-signup .signup-link{
+        margin-left: 5px;
+        padding: 3px 5px;
+    }
+}
+
+/* login Form */
+
+.login-form{
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px black inset;
+}
+
+.login-form-wrap{
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 560px){
+    .login-form-wrap{
+        width: 90%;
+        text-align: center;
+    }
+}
+
+.login-form .membership{
+    position: absolute;
+    right: 1%;
+    top: 5%;
+    width: 30%;
+    padding: 30px 5px;
+    text-align: center;
+    font-weight: 100;
+    font-size: 0.85rem;
+    color: #AAA;
+}
+
+@media screen and (max-width: 560px){
+    .login-form .membership{
+        position: relative;
+        right: 0;
+        top: 0;
+        width: 100%;
+        padding: 0 0 10px 0;
+        font-weight: 100;
+        font-size: 0.8rem;
+    }
+}
+
+.login-form .membership .lignt-icon{
+    width: 30%;
+}
+
+@media screen and (max-width: 560px){
+    .login-form .membership .lignt-icon{
+        width: 55px;
+    }
+}
+
+.login-form .membership .member{
+    font-size: 1rem;
+    font-family: arial;
+    color: #777;
+    font-weight: bold;
+}
+
+.login-form label{
+    display: block;
+    margin: 15px 0;
+}
+
+@media screen and (max-width: 560px){
+    .login-form label{
+        margin: 0;
+        margin-bottom: 10px;
+    }
+}
+
+.login-form label > span{
+    display: inline-block;
+    width: 100%;
+    color: black;
+    font-weight: 200;
+    margin-bottom: 8px;
+}
+
+@media screen and (max-width: 560px){
+    .login-form label > span{
+        width: 70%;
+        text-align: left;
+    }
+}
+
+.login-form label > input{
+    padding: 10px;
+    font-size: 0.9rem;
+    width: 65%;
+    border: 1px solid #979797;
+    border-radius: 5px;
+}
+
+.login-form label > input:hover{
+    border: 1px solid #4191e0;
+    box-shadow: 3px 3px 10px black;
+}
+
+.login-form .forgot-password{
+    text-align: right;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.login-form .forgot-password a{
+    color: #63a3e2;
+}
+
+.login-form .login-error{
+    font-size: 0.8rem;
+    color: red;
+}
+
+@media screen and (max-width: 560px){
+    .login-form .login-error{
+        font-size: 0.75rem;
+        text-align: left;
+    }
+}
+
+.login-form .login-submit{
+    margin: 10px 0;
+    text-align: center;
+}
+
+.login-form .login-submit input[type="submit"]{
+    position: relative;
+    padding: 10px 15px;
+    color: white;
+    background-color: #4191e0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 7px black;
+    cursor: pointer;
+}

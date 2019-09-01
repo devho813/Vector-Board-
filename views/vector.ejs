@@ -1,0 +1,200 @@
+<!-- vector (SVG 벡터 그래픽 페이지) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vector Board</title>
+    <meta name="Author" content="Lee ChanHo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/vector.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/raphael.js"></script>
+    <script src="/js/raphael_sub_lib/raphael.free_transform.js"></script> <!-- SVG 요소 드래그 이동 -->
+    <script src="/js/raphael_sub_lib/raphael.inline_text_editing.js"></script> <!-- SVG 텍스트 수정 -->
+    <script src="/js/raphael_sub_lib/raphael-svg-import-improve.js"></script> <!-- svg file import -->
+    <script src="/js/raphael_sub_lib/raphael.export.js"></script> <!-- SVG 추출 라이브러리 -->
+
+</head>
+<body>
+    <div class="vector-loading">
+        <div class="loading-wrap">
+            <img src="/images/LOGO0.png" alt="로고">
+            <div class="loader"></div>
+        </div>
+    </div>
+    <div class="vector">
+        <header class="header">
+            <div class="glostick">
+                <h3 class="title-logo">
+                    <a href="/">
+                        <img src="/images/LOGO0.png" alt="타이틀 로고">
+                        <span>Vector Board</span>
+                    </a>
+                </h3>
+                <div class="user-avatar">
+                    <a href="/">
+                        <img src="/images/user_avatar.jpg" alt="유저 아바타">
+                        <span><%=userName%></span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <section class="section">
+            <!-- 손, 펜, 텍스트, 메모지, 링크삽입, 동영상 -->
+            <ul class="toolBox">
+                <li id="toolHand" class="toolHand">
+                    <img src="/images/hand_image.png" alt="hand">
+                    <span>손</span>
+                </li>
+                <li id="toolPen">
+                    <img src="/images/pen_image.png" alt="pen">
+                    <span>펜</span>
+                    <div class="pen-hide hide">
+                        <!-- 빨, 노, 초, 하늘, 검 -->
+                        <ul class="pen-option">
+                            <li id="redPen"></li>
+                            <li id="yellowPen"></li>
+                            <li id="greenPen"></li>
+                            <li id="skyBluePen"></li>
+                            <li id="blackPen"></li>
+                            <li id="penSizeUp">
+                                <img src="/images/size_up_image.png">
+                            </li>
+                            <li id="penSizeDown">
+                                <img src="/images/size_down_image.png">
+                            </li>
+                        </ul>
+                        <img class="hide-esc" src="/images/hide_esc.png" alt="취소버튼">
+                    </div>
+                </li>
+                <li id="toolText">
+                    <img src="/images/text_image.png" alt="text">
+                    <span>텍스트</span>
+                </li>
+                <li id="toolMemo">
+                    <img src="/images/memo_image.png" alt="memo">
+                    <span>메모지</span>
+                </li>
+                <li id="toolLink">
+                    <img src="/images/link_image.png" alt="link">
+                    <span>이미지</span>
+                    <div class="link-hide hide">
+                        <img class="hide-esc" src="/images/hide_esc.png" alt="취소버튼">
+                        <span>이미지 링크 입력하세요</span>
+                        <input class="link-address" id="linkAddress" type="text" placeholder="http://www.">
+                        <input class="link-submint" id="linkBtn" type="button" value="이미지 삽입">
+                    </div>
+                </li>
+
+                <li id="toolVideo">
+                    <img src="/images/video_image.png" alt="video">
+                    <span>비디오</span>
+                    <div class="video-hide hide">
+                        <img class="hide-esc" src="/images/hide_esc.png" alt="취소버튼">
+                        <span>비디오 주소를 입력하세요</span>
+                        <input class="video-address" id="videoAddress" type="text" placeholder="ex) http://youtube.com/~~~">
+                        <input class="video-submint" id="videoBtn" type="button" value="비디오삽입">
+                    </div>
+                </li>
+            </ul>
+            <nav class="project-nav">
+                <img class="project-folder" src="/images/projects_folder.png">
+                <div class="proejct-nav-top">
+                    <h4 class="project-title"><%=projectName%></h4>
+                    <div class="project-info-wrap">
+                        <img class="project-info" src="/images/info_icon.png">
+                        <div class="project-description">
+                            <img src="/images/triangle_image.png">
+                            <h4>프로젝트 소유자</h4>
+                            <span>&nbsp;&nbsp;"<%=projectOwner%>"</span>
+                            <h4>프로젝트 소개</h4>
+                            <pre>&nbsp;&nbsp;"<%=projectDescription%>"</pre>
+                        </div>
+                    </div>
+
+                    <!-- 공동 참여자 -->
+                    <div class="participant">
+                        <ul class="participant-list">
+                            <li>
+                                <img src="/images/user_avatar.jpg">
+                                <span>이찬호</span>
+                            </li>
+                        </ul>
+                        <div class="share-button">
+                            <img src="/images/share_plus.png">
+                            <span>공유하기</span>
+                        </div>
+                        <div class="share-hide">
+                            <img src="/images/triangle_image.png">
+                            <h4>공유받을 사용자 이메일 주소를 입력하세요. <span>(프로젝트 소유자만 공유하기가 가능합니다)</span></h4>
+                            <input class="email" type="email" name="email" placeholder="이메일 주소를 입력해주세요" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/>
+                            <input class="button" type="submit" value="공유">
+                        </div>
+                        <!-- 다른 계정에 프로젝트 공유하기(ajax) -->
+                        <script>
+                            (function(){
+                                var $email = $(".email");
+                                var $button = $(".button");
+
+                                $button.on("click", function(){
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: {
+                                            email: $email.val(),
+                                            pid: <%=pid%>
+                                        },
+                                        url: '/shareProc',
+                                        success: function(data, status, jqXHR){
+                                            if(data.success){
+                                                alert("'"+data.shareEmail+"' 님의 공유 프로젝트 대기 목록에 추가되었습니다");
+                                            }else{
+                                                alert(data.notify);
+                                            }
+                                        },
+                                        error: function(xhr, status, e){
+                                            alert(e);
+                                        }
+                                    });
+                                });
+                            })();
+                        </script>
+                    </div>
+                </div>
+                <div class="proejct-nav-bottom">
+                    <span class="creation-date">생성 날짜: <%=creationDate%></span>
+                    <div class="project-output">
+                        <img id="saveSVG" src="/images/svg_icon.png" alt="svg">
+                        <img id="printing" src="/images/printing_icon.png" alt="printing">
+                        <img id="slideShow" src="/images/slide_show_icon.png" alt="slideShow">
+                    </div>
+                </div>
+            </nav>
+            <article class="work-space" id="workSpace">
+                <!-- SVG editor -->
+                <script>
+                    var pid = <%=pid%>; // 프로젝트 아이디값 전달
+                    var projectName = "<%=projectName%>"; // 프로젝트 이름 전달
+                    var userEmail = "<%=userEmail%>"; // 유저 이메일 전달
+                    var userName = "<%=userName%>"; // 유저 이름 전달
+                </script>
+                <!-- SVG 표현 처리 -->
+                <script src="/js/vector_drawing.js"></script>
+            </article>
+        </section>
+        <footer class="notice-modifier">
+            <h4 class="notice-header">
+                <img src="/images/light_icon.png">
+                <span>Notice |</span>
+            </h4>
+            <span class="notice-content">lee@lee(이찬호) 님이 프로젝트를 수정하였습니다.</span>
+        </footer>
+    </div>
+    <!-- 애니메이션 효과 처리 -->
+    <script src="/js/vector.js"></script>
+</body>
+</html> 

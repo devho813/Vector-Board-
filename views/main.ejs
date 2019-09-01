@@ -1,0 +1,228 @@
+<!-- main (메인 페이지) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vector Board</title>
+    <meta name="Author" content="Lee ChanHo">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <!-- index css -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script src="/js/prefixfree.min.js"></script>
+    <script src="/js/jquery-3.1.1.min.js"></script>
+
+    <!-- 스크롤 상태에 따른 GNB 레이아웃 변경 자바스크립트 -->
+    <script src="/js/scroll_state_gnb.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-container">
+                <!-- gnb 내용들 가운데 정렬을 위한 태그 -->
+                <div class="header-align-center">
+                    <h1 class="title">
+                        <a href="/">
+                            <img class="main-logo" src="/images/LOGO1.png" alt="메인 로고">
+                        </a>
+                    </h1>
+                    <img class='gnb-icon' src='/images/gnb_menu_icon.png'>
+                    <ul class="gnb">
+                        <li id="scrollUp">벡터 보드</li>
+                        <li id="description">제품설명</li>
+                        <% if(locals.sessionEmail){ %>
+                        <li id="logout">
+                            <a href="/logout">로그아웃</a>
+                        </li>
+                        <a class="start-canvas" href="/management">시작하기</a>
+                        <% }else{ %>
+                        <li id="login"><a href="/login">로그인</a></li>
+                        <li id="signUp"><a href="/signup">회원가입</a></li>
+                        <% } %>
+                    </ul>
+
+                    <!-- 브라우저 크기 변화에 따른 gnb 레이아웃 변경 -->
+                    <script>
+                        (function (){
+                            var $gnb = $(".gnb");
+                            var $gnbIcon = $(".gnb-icon");
+                            var $gnbList = $(".header .header-container .gnb > li, " +
+                                ".header .header-container .gnb li > a");
+
+                            if(window.innerWidth <= 768){
+                                $gnbIcon.css("display","inline-block");
+                            }
+
+                            $(window).on("resize", function(){
+                                // 브라우저의 크기가 768px 보다 작은경우
+                                if(window.innerWidth <= 768){
+                                    $gnbIcon.css("display","inline-block");
+                                    scrollStateGNB(true);
+                                    $gnb.css("display", "none");
+                                }else{
+                                    $gnbIcon.css("display","none");
+                                    $gnb.css("display", "block");
+                                }
+                            });
+
+                            $gnbIcon.on("click", function(){
+                                if($gnb.css("display") === "block"){
+                                    $gnb.fadeOut(500);
+                                }else{
+                                    $gnb.fadeIn(500);
+                                }
+                            });
+                        })();
+                    </script>
+                </div>
+            </div>
+            <div class="main">
+                <div class="main-wrap">
+                    <div class="main-left">
+                        <h2 class="main-title">Vector Board</h2>
+                        <p class="main-intro">일상적인 작업 외에도 서로 다른 직업군들 간의 효율적인<br>협업을 가능하게 하는 <span class="main-highlight">웹 기반 협업 도구</span></p>
+                        <% if(locals.sessionEmail){ %>
+                            <button class="start-canvas">
+                                <a href="/management">시작하기</a>
+                            </button>
+                        <% }else{ %>
+                            <button class="start-canvas">
+                                <a href="/login">시작하기</a>
+                            </button>
+                        <% } %>
+                    </div>
+                    <div class="main-right">
+                        <img class="main-img" src="/images/main_concept_image.png">
+                    </div>
+                    <div style="clear:both;"></div>
+
+                    <!-- 메인 타이틀, 인트로 첫 로딩시 애니메이션 효과 -->
+                    <script>
+                        (function(){
+                            var $left = $(".main-left");
+                            var $right = $(".main-right");
+
+                            if(window.innerWidth > 768){
+                                // 브라우저 넓이 값이 768보다 클 경우
+                                $left.css({left: "40px", opacity: 0}).animate({opacity: 1, left: "0"}, 1000);
+                                $right.css({top: "100px", opacity: 0}).animate({opacity: 1, top: "0"}, 1000);
+                            }else{
+                                // 브라우저 넓이 값이 768보다 작을 경우
+                                $left.css({left: "50px", opacity: 0}).animate({opacity: 1, left: "0"}, 1000);
+                                $right.css({left: "-50px", opacity: 0}).animate({opacity: 1, left: "0"}, 1000);
+                            }
+                        })();
+                    </script>
+                </div>
+            </div>
+        </header>
+        <section class="description">
+            <div class="description-wrap">
+                <article class="description0">
+                    <h3>개인과 팀. 모두에게 강력합니다</h3>
+                    <p>
+                        프로젝트 회의, 리서치, 브레인 스토밍, 건축디자인 등 업무 시작 단계부터 동료와 피드백을 주고받으며 <br>
+                        결과물을 완성해나가는 협업단계까지 모든 순간에 활용할 수 있도록 디자인됐습니다.
+                    </p>
+                </article>
+
+                <article class="description1">
+                    <img src="/images/vector_board_capture1.jpg" alt="제품 상세 설명-1">
+                </article>
+
+                <article class="description2">
+                    <h3><span>제품 상세 기능</span></h3>
+                    <p>
+                        전 세계 "<%=userCount%>" 명의 사용자들이 아래와 같은 다양한 기능들을 활용하고 있습니다.
+                    </p>
+                    <img src="/images/description0.png" alt="제품 상세 설명-2">
+                </article>
+            </div>
+        </section>
+        <section class="bottom-start">
+            <img src="/images/bottom_start_image.png">
+            <p class="bottom-start-text">누구나 손쉽게 사용 할 수 있는 Vector Board<br>어렵지 않습니다. 한번 시작해보세요.</p>
+            <% if(locals.sessionEmail){ %>
+                <a href="/management">시작하기</a>
+            <% }else{ %>
+                <a href="/login">시작하기</a>
+            <% } %>
+        </section>
+        <footer class="footer">
+            <div class="footer-wrap">
+                <table class="footer-table">
+                    <tr class="footer-title">
+                        <td colspan="2">
+                            <img src="images/LOGO1.png" alt="로고">
+                            <h3>Vector Board</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer-addr" colspan="2">충청북도 충주시 대소원면 대학로 50 한국교통대학교 소프트웨어학과</td>
+                    </tr>
+                    <tr>
+                        <td class="image-td">
+                            <img class="phone-call-img" src="images/phone_call.png">
+                        </td>
+                        <td>010-6505-6531</td>
+                    </tr>
+                    <tr>
+                        <td class="image-td">
+                            <img class="envelope-img" src="/images/envelope.png">
+                        </td>
+                        <td>luxury_8@naver.com</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <img class="vender-icons" src="/images/facebook_icon.png">
+                            </a>
+                            <a href="https://twitter.com/" target="_blank">
+                                <img class="vender-icons" src="/images/twitter_icon.png">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </footer>
+    </div>
+
+    <!-- gnb 메뉴 리스트 클릭시 스크롤 이동 이벤트 -->
+    <script>
+        (function(){
+            var $scrollUp = $("#scrollUp"); // 상단으로
+            var $des = $("#description"); // 제품소개
+
+
+            $scrollUp.on("click", function () {
+                $("html, body").stop().animate({ scrollTop: '0' });
+            });
+
+            $des.on("click", function () {
+                var $desOffset = $(".description").offset();
+                $("html, body").stop().animate({ scrollTop: $desOffset.top });
+            });
+        })();
+    </script>
+
+    <script>
+        $(document).on("scroll", function(){
+            // 모바일 디바이스 일 경우 gnb 메뉴 고정 미적용
+            if(window.innerWidth < 768){
+                return;
+            }
+
+            // 스크롤의 위치가 최상 단일 경우
+            if($(this).scrollTop() === 0){
+                scrollStateGNB(true);
+            }else{
+                scrollStateGNB(false);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+/*********************
+    signup <회원가입>
+**********************/
+body, html{
+    background-color: #4191e0;
+}
+
+.sign-up{
+    width: 100%;
+    height: 100%;
+    background-color: #4191e0;
+    background-image: url(../images/overlay.png), url(../images/pattern-size1.svg);
+    background-position: top left, center center;
+    background-attachment: fixed, fixed;
+    background-size: auto, cover;
+}
+
+@media screen and (max-width: 615px){
+    .sign-up{
+        height: 135%;
+    }
+}
+
+.sign-up .goto-main{
+    position: relative;
+    left: 20px;
+    top: 20px;
+    color: white;
+    font-weight: 100;
+}
+
+.sign-up .signup-container{
+    position: relative;
+    top: 15%;
+    margin: 0 auto;
+    width: 750px;
+}
+
+@media screen and (max-width: 768px){
+    .sign-up .signup-container{
+        top: 10%;
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 615px){
+    .sign-up .signup-container{
+        top: 5%;
+    }
+}
+
+/* header */
+
+.header{
+    position: relative;
+    width: 100%;
+}
+
+.header .form-logo{
+    display: inline-block;
+    position: relative;
+    top: 12px;
+    margin-right: 15px;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 540px){
+    .header .form-logo{
+        display: block;
+        top: 0;
+        margin-right: 0;
+    }
+}
+
+.header .form-logo img{
+    width: 95px;
+}
+
+.header .form-title{
+    display: inline-block;
+    color: white;
+    font-weight: 100;
+    font-size: 2.3rem;
+    margin: 0;
+}
+
+.header .form-title > span{
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    box-shadow: 3px 3px 15px black;
+}
+
+.header .form-title .form-description{
+    position: relative;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    box-shadow: 3px 3px 15px black;
+    font-size: 1.1rem;
+}
+
+@media screen and (max-width: 540px){
+    .header .form-title .form-description{
+        font-size: 1rem;
+    }
+    
+}
+
+.header .go-login{
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+@media screen and (max-width: 768px){
+    .header .go-login{
+        margin: 20px 0 15px;
+    }
+}
+
+.header .go-login .login-question{
+    font-size: 0.9rem;
+    color: white;
+}
+
+.header .go-login .login-link{
+    position: relative;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #4191e0;
+}
+
+@media screen and (max-width: 768px){
+    .header .go-login .login-link{
+        margin-left: 5px;
+        padding: 3px 5px;
+    }
+}
+
+/* signUp Form */
+
+.signup-form{
+    position: relative;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px black inset;
+}
+
+@media screen and (max-width: 615px){
+    .signup-form{
+        padding-top: 10px;
+        text-align: center;
+    }
+}
+
+.signup-form label{
+    display: block;
+    margin: 20px 0;
+}
+
+@media screen and (max-width: 615px){
+    .signup-form label{
+        margin: 10px 0;
+    }
+}
+
+.signup-form label > span{
+    display: inline-block;
+    width: 100%;
+    color: black;
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+
+@media screen and (max-width: 615px){
+    .signup-form label > span{
+        width: 66%;
+        text-align: left;
+    }
+}
+
+.signup-form label > input{
+    padding: 10px;
+    font-size: 0.9rem;
+    width: 65%;
+    border: 1px solid #979797;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 615px){
+    .signup-form label > input{
+        width: 60%;
+        font-size: 0.8rem;
+    }
+}
+
+.signup-form label > input:hover{
+    border: 1px solid #4191e0;
+    box-shadow: 3px 3px 10px black;
+}
+
+.signup-form .form-left{
+    position: relative;
+    display: inline-block;
+    width: 49%;
+    margin-left: 30px;
+    vertical-align: top;
+}
+
+@media screen and (max-width: 670px){
+    .signup-form .form-left{
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 615px){
+    .signup-form .form-left{
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        vertical-align: initial;
+
+    }
+}
+
+.signup-form .check-complete{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../images/check_icon.png") no-repeat;
+    background-size: 100%;
+    background-color: #2bc519;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.signup-form .form-right{
+    position: relative;
+    display: inline-block;
+    width: 45%;
+}
+
+@media screen and (max-width: 615px){
+    .signup-form .form-right{
+        display: block;
+        width: 100%;
+    }
+}
+
+.signup-form .form-bottom{
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.signup-form .form-bottom .agreement{
+    position: relative;
+}
+
+.signup-form .form-bottom .agreement .terms-check{
+    vertical-align: top;
+}
+
+@media screen and (max-width: 680px){
+    .signup-form .form-bottom .agreement .terms-check{
+        vertical-align: initial;
+        position: relative;
+        left: 135px;
+        top: 22px;
+        margin-bottom: 30px;
+    }
+}
+
+.signup-form .form-bottom .agreement .agreement-text{
+    position: relative;
+    display: inline-block;
+    margin: 0 0 15px 10px;
+    font-size: 0.9rem;
+}
+
+.signup-form .form-bottom .agreement .agreement-text .privacy-policy{
+    color: #3643ec;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 680px){
+    .signup-form .form-bottom .agreement .agreement-text .privacy-policy:before{
+        content: '\A';
+        white-space: pre;
+    }
+}
+
+.signup-form .form-bottom .agreement .agreement-text .terms-of-service{
+    color: #3643ec;
+    cursor: pointer;
+}
+
+.signup-form .form-bottom .signup-submit{
+    display: none;
+    position: relative;
+    padding: 10px 15px;
+    color: white;
+    background-color: #4191e0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 7px black;
+    cursor: pointer;
+}

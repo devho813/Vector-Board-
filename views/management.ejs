@@ -1,0 +1,144 @@
+<!-- management (프로젝트 관리 페이지) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>프로젝트 관리 ㅣ Vector Board</title>
+    <meta name="Author" content="Lee ChanHo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/management.css">
+
+    <script src="/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div class="management">
+        <div class="blackground">
+            <div class="new-project-popup">
+                <form name="newProject" method="post" action="/management/newProject">
+                    <h1 class="popup-header">
+                        <img src="/images/info2_icon.png">
+                        <span>새 프로젝트 생성</span>
+                    </h1>
+                    <p class="popup-summary">
+                        새로운 프로젝트를 생성합니다.<br>
+                        새 프로젝트 생성시 프로젝트 ID값이 자동 할당되며 해당 ID값을 통해 다른 사용자와 공유할 수 있습니다.
+                    </p>
+                    <ul class="popup-input">
+                        <li>
+                            <h4>프로젝트 이름</h4>
+                            <input class="project-name" type="text" name="pname" maxlength="24" placeholder="프로젝트 이름을 입력해주세요" required>
+                        </li>
+                        <li>
+                            <h4>프로젝트 설명</h4>
+                            <textarea class="project-description" name="projectDescription" placeholder="프로젝트를 설명해주세요" maxlength="180" required></textarea>
+                        </li>
+                    </ul>
+                    <div class="popup-button">
+                        <input type="submit" value="생성">
+                        <input class="popup-cancel" type="button" value="취소">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <header class="header">
+            <div class="glostick">
+                <a href="/">
+                    <h3 class="title-logo">
+                        <img src="/images/LOGO0.png" alt="타이틀 로고">
+                        <span>Vector Board</span>
+                    </h3>
+                </a>
+                <div class="search">
+                    <form name="searchForm" method="get" action="/management/searchProject">
+                        <input class="search-content" name="searchContent" type="text" placeholder="프로젝트 이름을 입력해주세요">
+                        <input class="search-button" type="submit" value="검색">
+                    </form>
+                </div>
+                <div class="user-avatar">
+                    <span class="wait-share-count"><%=waitShareInfo.length%></span>
+                    <img class="user-avatar-image" src="/images/user_avatar.jpg" alt="유저 아바타">
+                    <span class="user-name"><%=userName%></span>
+                </div>
+                <div class="wait-share">
+                    <img src="/images/triangle_image.png">
+                    <ul class="wait-share-list">
+                        <h4>공유프로젝트 대기 목록</h4>
+                        <%for(let i=0; i<waitShareInfo.length; i++){%>
+                            <li>
+                                <input class="pid" type="hidden" name="pid" value="<%=waitShareInfo[i].pid%>">
+                                <span class="wait-share-name"><%= waitShareInfo[i].pname%></span>
+                                <button class="share share-button">공유</button>
+                                <button class="waitRemove remove-button">제거</button>
+                            </li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+            <!-- 그라디에이션 border -->
+            <div class="gradient-border"></div>
+            <nav class="top-nav">
+                <% if(projectType == "myProject"){ %>
+                <div class="project-type">
+                    <img class="project-icon" src="/images/my_project_icon.png">
+                    <span>내 프로젝트</span>
+                    <img class="type-arrow" src="/images/type_arrow.png">
+                </div>
+                <% }else if(projectType == "shareProject"){ %>
+                <div class="project-type">
+                    <img class="project-icon" src="/images/share_project_icon.png">
+                    <span>공유 프로젝트</span>
+                    <img class="type-arrow" src="/images/type_arrow.png">
+                </div>
+                <% }else if(projectType == "searchProject"){ %>
+                <div class="project-type">
+                    <img class="project-icon" src="/images/search_project_icon.png">
+                    <span>검색 프로젝트</span>
+                    <img class="type-arrow" src="/images/type_arrow.png">
+                </div>
+                <% } %>
+                <ul class="hide-project-type">
+                    <li>
+                        <a href="/management/myProject">
+                            <img src="/images/my_project_icon.png" alt="내 프로젝트 아이콘">
+                            <span>내 프로젝트</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/management/shareProject">
+                            <img src="/images/share_project_icon.png" alt="공유 프로젝트 아이콘">
+                            <span>공유 프로젝트</span>
+                        </a>
+                    </li>
+                    <li>
+                        <img src="/images/search_project_icon.png" alt="검색 프로젝트 아이콘">
+                        <span>검색 프로젝트</span>
+                    </li>
+                </ul>
+                <% if (projectType == "myProject") { %>
+                    <div class="new-project">
+                        <button class="new-button">NEW</button>
+                    </div>
+                <% } %>
+            </nav>
+        </header>
+        <section class="project-management">
+            <%if(projectType == "myProject"){%>
+            <%- include("my_project.ejs"); %>
+            <%}else if(projectType == "shareProject"){%>
+            <%- include("share_project.ejs"); %>
+            <%}else if(projectType == "searchProject"){%>
+            <%- include("search_project.ejs"); %>
+            <%}%>
+        </section>
+    </div>
+
+    <!-- 공유 대기 프로젝트 Ajax 처리 -->
+    <script src="/js/wait_share_proc.js"></script>
+
+    <!-- management -->
+    <script src="/js/management.js"></script>
+</body>
+</html>

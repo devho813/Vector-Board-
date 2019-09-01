@@ -1,0 +1,44 @@
+<!-- management (프로젝트 관리 페이지) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>프로젝트 관리 ㅣ Vector Board</title>
+    <meta name="Author" content="Lee ChanHo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/management.css">
+
+    <script src="/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div class="search-proejct">
+        <ul class="search-project-wrap">
+            <% if(searchProjectInfo){%>
+                <% for(var i=0; i<searchProjectInfo.length; i++){%>
+                    <li class="search-project-list">                        
+                        <a href="/vector?pid=<%=searchProjectInfo[i].pid%>">
+                            <img class="mini-project" src="/project/<%=searchProjectInfo[i].pid%>/project.svg">
+                            <p class="search-project-info">
+                                <span>프로젝트명: <%= searchProjectInfo[i].pname%></span><br>
+                                <span>소유자: <%= searchProjectInfo[i].owner%></span><br>
+                                <span>생성일: <%= searchProjectInfo[i].date%></span>
+                            </p>
+                        </a>
+                    </li>
+                <%}%>
+            <%}%>
+        </ul>
+    </div>
+    <script>
+        function removeProject(projectForm){
+            var msg = "프로젝트를 정말 제거하시겠습니까?";
+            if (confirm(msg)!=0) {
+                projectForm.submit();
+            }
+        }
+    </script>
+</body>
+</html>
