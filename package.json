@@ -13,7 +13,7 @@
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.15.2",
     "fs-extra": "^4.0.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "mysql": "^2.13.0",
     "node-mysql": "^0.4.2",
     "sha256": "^0.2.0",
